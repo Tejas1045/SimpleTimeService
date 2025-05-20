@@ -13,8 +13,11 @@ we can directly pull the image and use the docker run command to run the contain
 
 ### Steps to follow
 
-##### 1. Git clone the repository and check you are checkedout to "main" branch.
-    Repo Link- https://github.com/Tejas1045/SimpleTimeService.git
+##### 1. Git clone the repository and check you are checkout to "main" branch.
+
+    Repo Link main branch - https://github.com/Tejas1045/SimpleTimeService/tree/main
+
+    Repo Link to clone- https://github.com/Tejas1045/SimpleTimeService.git
 
 ##### 2. Run the docker build command to build the image locally.
 
@@ -45,7 +48,71 @@ AWS cloud access
 
 ### Steps to follow
 
-###
+#### 1. Git clone the repository and check you are checkout to "terrafrom-changes" branch.
+
+    Repo Link terraform changes branch - https://github.com/Tejas1045/SimpleTimeService/tree/terraform-changes
+
+    Repo Link to clone- https://github.com/Tejas1045/SimpleTimeService.git
+
+    run the command "git checkout terrafrom-changes"
+
+#### 2. Create a AWS user in IAM.
+
+Create a IAM user with either with admin access or we can add the accesss to specific resources like s3, api gateway, EC2, dynamodb, VPC, ECR, IAM EC2 network ploicies. Copy the access key and secret key for further use.
+
+#### 3. Create ECR Repository - simple-time-service
+
+Create A private repositoy in the ECR to store the image for the lambda function. 
+
+#### 4. Creating image and pushing it to ECR repositoy.
+
+To push the image to ECR, we need to build the image first. so clone the git reposiory and make sure we checkout to terrafrom-change branch.
+
+After the clone we need to export the access key, secret key and the default region on terminal. 
+if we are using the bash terminal or linux system follow following commands. 
+
+export AWS_ACCESS_KEY_ID="<access-key>"
+export AWS_SECRET_ACCESS_KEY="<secret-key>"
+export AWS_DEFAULT_REGION="<region>"
+
+In the ECR repository we created we have a tab call ed "view push Commands" which helps us to login to ECR and the push the image to the repository. follow the steps. 
+i. login command 
+ii. Build the image
+iii. tag the image
+xi. push the image.
+
+All the steps commands are present in the "view push command" section.
+
+After we pus hthe image copy the image URL and add it to the main.tf file to the lambda defination.
+
+resource "aws_lambda_function" "simple_time_service" {
+  function_name = "simple_time_service"
+  role          = aws_iam_role.lambda_exec_role.arn
+  package_type  = "Image"
+  image_uri     = "<Your Image URL>"
+  timeout       = 10
+
+  vpc_config {
+    subnet_ids         = aws_subnet.private[*].id
+    security_group_ids = [aws_security_group.lambda_sg.id]
+  }
+}
+
+#### 5. Create S3 bucket and Dynamodb table for remote statefile.
+
+Now we can create a S3 bucket  to store the statefile in the remote location which helps multiple people the work on the functions at the same time. where a we need to create a dynamodb table to keep a tack of lock on the s3 bucket while some one is running the terraform task. To avoid multiple interaction with statefile at a time. 
+
+After creating S3 bucket and dynamodb, we need tyo store the bucket name and table value in "backend.tf" file.
+
+terraform {
+  backend "s3" {
+    bucket         = "<S3_bucket_name>"
+    key            = "<filepath-to-statefile>"
+    region         = "<region>"
+    dynamodb_table = "<dynamodb_table_name>"
+    encrypt        = true
+  }
+}
 
 
 
