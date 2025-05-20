@@ -78,10 +78,10 @@ export AWS_DEFAULT_REGION="<region>"
 ```
 
 In the ECR repository we created we have a tab call ed "view push Commands" which helps us to login to ECR and the push the image to the repository. follow the steps. 
-i. login command 
-ii. Build the image
-iii. tag the image
-xi. push the image.
+4.1. login command 
+4.2. Build the image
+4.3. tag the image
+4.4. push the image.
 
 All the steps commands are present in the "view push command" section.
 
@@ -118,29 +118,29 @@ After creating S3 bucket and dynamodb, we need tyo store the bucket name and tab
 
 #### 6. Deploying resources manually and workflow
 
-##### Manual deplyment
+##### 6.1 Manual deplyment
 
 we can deploy the terrafrom resources manually. by using terrafrom command in the terminal were we have cloned the repository. 
 
-    i. locally go to the repository were it is cloned and the access key and secret key are exported. or check for the command form step no 3 and execute them. 
+6.1.1  locally go to the repository were it is cloned and the access key and secret key are exported. or check for the command form step no 3 and execute them. 
 
-    ii. after the export we need to initiate the repository to terrafrom so run the following command. this will initiate the backend configurations for terrafrom and download the required modules or dependancies.
+6.1.2  after the export we need to initiate the repository to terrafrom so run the following command. this will initiate the backend configurations for terrafrom and download the required modules or dependancies.
 
-        terrafrom init
+    terrafrom init
 
-    iii. After a successful init we can do a terrafrom plan to check for the resources which will be created when deployed.
+6.1.3 After a successful init we can do a terrafrom plan to check for the resources which will be created when deployed.
 
-        terrafrom plan
+    terrafrom plan
 
-    xi. After a plan we can go ahead and to apply to deply the terrafrom resources. This will create the resources mentioned in the terrafrom configurations in the branch.
+6.1.4 After a plan we can go ahead and to apply to deply the terrafrom resources. This will create the resources mentioned in the terrafrom configurations in the branch.
 
-        terraform apply 
+    terraform apply 
 
-    X. After the successful deployment we can verify the output from the output url we get after the apply completion. which is a apigate way URL to trigger the lambda function and get the output.
+6.1.5 After the successful deployment we can verify the output from the output url we get after the apply completion. which is a apigate way URL to trigger the lambda function and get the output.
 
-    xi. After the verification we can delete the resources created by terrafrom by using the following command. 
+6.1.6  After the verification we can delete the resources created by terrafrom by using the following command. 
 
-        terrafrom destroy
+    terrafrom destroy
 
 ##### Workflow method. 
 
