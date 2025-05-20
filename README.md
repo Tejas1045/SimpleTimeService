@@ -122,29 +122,29 @@ After creating S3 bucket and dynamodb, we need tyo store the bucket name and tab
 
 we can deploy the terrafrom resources manually. by using terrafrom command in the terminal were we have cloned the repository. 
 
-i. locally go to the repository were it is cloned and the access key and secret key are exported. or check for the command form step no 3 and execute them. 
+    i. locally go to the repository were it is cloned and the access key and secret key are exported. or check for the command form step no 3 and execute them. 
 
-ii. after the export we need to initiate the repository to terrafrom so run the following command. this will initiate the backend configurations for terrafrom and download the required modules or dependancies.
+    ii. after the export we need to initiate the repository to terrafrom so run the following command. this will initiate the backend configurations for terrafrom and download the required modules or dependancies.
 
-    terrafrom init
+        terrafrom init
 
-iii. After a successful init we can do a terrafrom plan to check for the resources which will be created when deployed.
+    iii. After a successful init we can do a terrafrom plan to check for the resources which will be created when deployed.
 
-    terrafrom plan
+        terrafrom plan
 
-xi. After a plan we can go ahead and to apply to deply the terrafrom resources. This will create the resources mentioned in the terrafrom configurations in the branch.
+    xi. After a plan we can go ahead and to apply to deply the terrafrom resources. This will create the resources mentioned in the terrafrom configurations in the branch.
 
-    terraform apply 
+        terraform apply 
 
-X. After the successful deployment we can verify the output from the output url we get after the apply completion. which is a apigate way URL to trigger the lambda function and get the output.
+    X. After the successful deployment we can verify the output from the output url we get after the apply completion. which is a apigate way URL to trigger the lambda function and get the output.
 
-xi. After the verification we can delete the resources created by terrafrom by using the following command. 
+    xi. After the verification we can delete the resources created by terrafrom by using the following command. 
 
-    terrafrom destroy
+        terrafrom destroy
 
 ##### Workflow method. 
 
-i
+i. 
 
 
 
