@@ -79,13 +79,13 @@ export AWS_DEFAULT_REGION="<region>"
 
 In the ECR repository we created we have a tab call ed "view push Commands" which helps us to login to ECR and the push the image to the repository. follow the steps. 
 
-4.1 login command 
+**4.1** login command 
 
-4.2 Build the image
+**4.2** Build the image
 
-4.3 tag the image
+**4.3** tag the image
 
-4.4 push the image
+**4.4** push the image
 
 All the steps commands are present in the "view push command" section.
 
@@ -126,23 +126,23 @@ After creating S3 bucket and dynamodb, we need tyo store the bucket name and tab
 
 we can deploy the terrafrom resources manually. by using terrafrom command in the terminal were we have cloned the repository. 
 
-6.1.1: locally go to the repository were it is cloned and the access key and secret key are exported. or check for the command form step no 3 and execute them. 
+**6.1.1:** locally go to the repository were it is cloned and the access key and secret key are exported. or check for the command form step no 3 and execute them. 
 
-6.1.2:  after the export we need to initiate the repository to terrafrom so run the following command. this will initiate the backend configurations for terrafrom and download the required modules or dependancies.
+**6.1.2:**  after the export we need to initiate the repository to terrafrom so run the following command. this will initiate the backend configurations for terrafrom and download the required modules or dependancies.
 
     terrafrom init
 
-6.1.3: After a successful init we can do a terrafrom plan to check for the resources which will be created when deployed.
+**6.1.3:** After a successful init we can do a terrafrom plan to check for the resources which will be created when deployed.
 
     terrafrom plan
 
-6.1.4: After a plan we can go ahead and to apply to deply the terrafrom resources. This will create the resources mentioned in the terrafrom configurations in the branch.
+**6.1.4:** After a plan we can go ahead and to apply to deply the terrafrom resources. This will create the resources mentioned in the terrafrom configurations in the branch.
 
     terraform apply 
 
-6.1.5: After the successful deployment we can verify the output from the output url we get after the apply completion. which is a apigate way URL to trigger the lambda function and get the output.
+**6.1.5:** After the successful deployment we can verify the output from the output url we get after the apply completion. which is a apigate way URL to trigger the lambda function and get the output.
 
-6.1.6: After the verification we can delete the resources created by terrafrom by using the following command. 
+**6.1.6:** After the verification we can delete the resources created by terrafrom by using the following command. 
 
     terrafrom destroy
 
@@ -163,9 +163,9 @@ Secret Name	Purpose
 
 In workflow we are using CICD tool github action for deplyments. all together we have 3 workflows
 
-6.2.1: #####docker-ecr.yaml##### -- This is configured to trigger on any push to "terrafrom-changes" branch. This flow creates a image and then pushes the image to ECR repository.
+**6.2.1: docker-ecr.yaml** -- This is configured to trigger on any push to "terrafrom-changes" branch. This flow creates a image and then pushes the image to ECR repository.
 
-6.2.2: #####terrafrom.yml##### -- This Workflow is a manual trigger workflow used to deply the resources to AWS. 
+**6.2.2: terrafrom.yml**-- This Workflow is a manual trigger workflow used to deply the resources to AWS. 
 
 Go to actions -> Terrafrom plan and Apply (left panel) -> run workflow
 ![alt text](image.png)
@@ -174,6 +174,12 @@ Go to actions -> Terrafrom plan and Apply (left panel) -> run workflow
 
     terrafrom branch to apply from -> "terrafrom-changes"
 
+After the deployment is completed the function can de accessed by the URL on the API Gateway output. and verify the output.
+
+**6.2.3: terrafrom-destroy.yml** -- This workflow is also a manuall trigger workflow same as terrafrom.yml and mainly used to destroy the resources created by terrafrom. 
+
+
+### NOTE- Please delete the resources which are not creatred by terrafrom manually i.e (s3 bucket, dynamodb table, ecr repository and IAm user) to avoid any extra charges after testing. 
 
 
 
