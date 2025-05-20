@@ -7,6 +7,8 @@ In task one we create a simple python program to list return us the timestamp an
 The generated image is been stored at - https://hub.docker.com/repository/docker/tejas1045/simple-time-service/general
 
 we can directly pull the image and use the docker run command to run the container as mentioned in step no 3.
+    
+    Actual CMD - docker run -p 5000:5000 simple-time-service:latest
 
 ### pre-requisites
  Docker installed
@@ -58,7 +60,7 @@ AWS cloud access
 
 #### 2. Create a AWS user in IAM.
 
-Create a IAM user with either with admin access or we can add the accesss to specific resources like s3, api gateway, EC2, dynamodb, VPC, ECR, IAM EC2 network ploicies. Copy the access key and secret key for further use.
+Create a IAM user with either with admin access or we can add the accesss to specific resources like S3, Api Gateway, EC2, Dynamodb, VPC, ECR, IAM, EC2 network ploicies. Copy the access key and secret key for further use.
 
 #### 3. Create ECR Repository - simple-time-service
 
@@ -77,7 +79,7 @@ export AWS_SECRET_ACCESS_KEY="<secret-key>"
 export AWS_DEFAULT_REGION="<region>"
 ```
 
-In the ECR repository we created we have a tab call ed "view push Commands" which helps us to login to ECR and the push the image to the repository. follow the steps. 
+In the ECR repository we created we have a tab called "view push Commands" which helps us to login to ECR and the push the image to the repository. follow the steps. 
 
 **4.1** login command 
 
@@ -95,7 +97,7 @@ After we pus hthe image copy the image URL and add it to the main.tf file to the
     function_name = "simple_time_service"
     role          = aws_iam_role.lambda_exec_role.arn
     package_type  = "Image"
-    `image_uri     = "<Your Image URL>"`
+    image_uri     = "<Your Image URL>"
     timeout       = 10
 
     vpc_config {
@@ -122,7 +124,7 @@ After creating S3 bucket and dynamodb, we need tyo store the bucket name and tab
 
 #### 6. Deploying resources manually and workflow
 
-##### 6.1 Manual deplyment
+#### 6.1 Manual deplyment
 
 we can deploy the terrafrom resources manually. by using terrafrom command in the terminal were we have cloned the repository. 
 
@@ -146,7 +148,7 @@ we can deploy the terrafrom resources manually. by using terrafrom command in th
 
     terrafrom destroy
 
-##### Workflow method. 
+#### 6.2 Workflow method. 
 
 before using the workflows we need to add some secrets to repository which are used in workflows. 
 path to secrets is -- settings-> secrets and variables -> Actions -> Repository secrets -> new repository secret
@@ -168,13 +170,16 @@ In workflow we are using CICD tool github action for deplyments. all together we
 **6.2.2: terrafrom.yml**-- This Workflow is a manual trigger workflow used to deply the resources to AWS. 
 
 Go to actions -> Terrafrom plan and Apply (left panel) -> run workflow
-![alt text](image.png)
+
+![alt text](images/Workflow-input.png)
 
     use workflow from -> "main"
 
     terrafrom branch to apply from -> "terrafrom-changes"
 
 After the deployment is completed the function can de accessed by the URL on the API Gateway output. and verify the output.
+
+![alt text](images/output.png)
 
 **6.2.3: terrafrom-destroy.yml** -- This workflow is also a manuall trigger workflow same as terrafrom.yml and mainly used to destroy the resources created by terrafrom. 
 
