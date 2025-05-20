@@ -78,10 +78,11 @@ export AWS_DEFAULT_REGION="<region>"
 ```
 
 In the ECR repository we created we have a tab call ed "view push Commands" which helps us to login to ECR and the push the image to the repository. follow the steps. 
-4.1. login command 
-4.2. Build the image
-4.3. tag the image
-4.4. push the image.
+
+4.1 login command 
+4.2 Build the image
+4.3 tag the image
+4.4 push the image.
 
 All the steps commands are present in the "view push command" section.
 
