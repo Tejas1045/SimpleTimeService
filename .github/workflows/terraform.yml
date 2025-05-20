@@ -2,6 +2,11 @@ name: Terraform Plan and Apply
 
 on:
   workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to run the workflow on'
+        required: true
+        default: 'terraform-changes'
 
 jobs:
   terraform:
