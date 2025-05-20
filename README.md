@@ -85,7 +85,7 @@ In the ECR repository we created we have a tab call ed "view push Commands" whic
 
 4.3 tag the image
 
-4.4 push the image.
+4.4 push the image
 
 All the steps commands are present in the "view push command" section.
 
@@ -148,7 +148,32 @@ we can deploy the terrafrom resources manually. by using terrafrom command in th
 
 ##### Workflow method. 
 
-i. 
+before using the workflows we need to add some secrets to repository which are used in workflows. 
+path to secrets is -- settings-> secrets and variables -> Actions -> Repository secrets -> new repository secret
+
+Secret Name	Purpose
+
+    AWS_ACCESS_KEY_ID -- AWS IAM user access key for authentication
+
+    AWS_SECRET_ACCESS_KEY -- AWS IAM user secret key for authentication
+
+    AWS_REGION -- Your target AWS region (e.g., us-east-1)
+
+    ECR_REPOSITORY_URI -- Your full ECR URI (e.g., 123456789012.dkr.ecr.us-east-1.amazonaws.com/my-repo)
+
+In workflow we are using CICD tool github action for deplyments. all together we have 3 workflows
+
+6.2.1: #####docker-ecr.yaml##### -- This is configured to trigger on any push to "terrafrom-changes" branch. This flow creates a image and then pushes the image to ECR repository.
+
+6.2.2: #####terrafrom.yml##### -- This Workflow is a manual trigger workflow used to deply the resources to AWS. 
+
+Go to actions -> Terrafrom plan and Apply (left panel) -> run workflow
+![alt text](image.png)
+
+    use workflow from -> "main"
+
+    terrafrom branch to apply from -> "terrafrom-changes"
+
 
 
 
