@@ -105,16 +105,17 @@ resource "aws_lambda_function" "simple_time_service" {
 Now we can create a S3 bucket  to store the statefile in the remote location which helps multiple people the work on the functions at the same time. where a we need to create a dynamodb table to keep a tack of lock on the s3 bucket while some one is running the terraform task. To avoid multiple interaction with statefile at a time. 
 
 After creating S3 bucket and dynamodb, we need tyo store the bucket name and table value in "backend.tf" file.
-
-terraform {
-  backend "s3" {
-    `bucket         = "<S3_bucket_name>"`
-    `key            = "<filepath-to-statefile>"`
-    `region         = "<region>"`
-    `dynamodb_table = "<dynamodb_table_name>"`
-    encrypt        = true
-  }
-}
+```bash
+    terraform {
+    backend "s3" {
+        `bucket         = "<S3_bucket_name>"`
+        `key            = "<filepath-to-statefile>"`
+        `region         = "<region>"`
+        `dynamodb_table = "<dynamodb_table_name>"`
+        encrypt        = true
+        }
+    }
+```
 
 
 
