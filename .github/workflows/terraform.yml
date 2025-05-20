@@ -2,16 +2,21 @@ name: Terraform Plan and Apply
 
 on:
   workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Terraform branch to apply from'
+        required: true
+        default: 'terraform-changes'
 
 jobs:
   terraform:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout terraform-changes branch
+      - name: Checkout specified branch
         uses: actions/checkout@v3
         with:
-          ref: terraform-changes
+          ref: ${{ github.event.inputs.branch }}
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
