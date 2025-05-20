@@ -2,8 +2,8 @@ name: Build and Push to ECR
 
 on:
   workflow_dispatch:
-  # push:
-  #   branches: [ terraform-changes ]
+  push:
+    branches: [ terraform-changes ]
 
 jobs:
   build-and-push:
