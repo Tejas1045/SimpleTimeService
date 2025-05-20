@@ -2,11 +2,11 @@ name: Terraform Destroy
 
 on:
   workflow_dispatch:
-    inputs:
-      branch:
-        description: 'Terraform branch to apply from'
-        required: true
-        default: 'terraform-changes'
+    # inputs:
+    #   branch:
+    #     description: 'Terraform branch to apply from'
+    #     required: true
+    #     default: 'terraform-changes'
 
 jobs:
   destroy:
