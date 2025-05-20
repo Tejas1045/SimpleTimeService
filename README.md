@@ -71,9 +71,11 @@ To push the image to ECR, we need to build the image first. so clone the git rep
 After the clone we need to export the access key, secret key and the default region on terminal. 
 if we are using the bash terminal or linux system follow following commands. 
 
+```bash
 export AWS_ACCESS_KEY_ID="<access-key>"
 export AWS_SECRET_ACCESS_KEY="<secret-key>"
 export AWS_DEFAULT_REGION="<region>"
+```
 
 In the ECR repository we created we have a tab call ed "view push Commands" which helps us to login to ECR and the push the image to the repository. follow the steps. 
 i. login command 
@@ -89,7 +91,7 @@ resource "aws_lambda_function" "simple_time_service" {
   function_name = "simple_time_service"
   role          = aws_iam_role.lambda_exec_role.arn
   package_type  = "Image"
-  image_uri     = "<Your Image URL>"
+  `image_uri     = "<Your Image URL>"`
   timeout       = 10
 
   vpc_config {
@@ -106,13 +108,14 @@ After creating S3 bucket and dynamodb, we need tyo store the bucket name and tab
 
 terraform {
   backend "s3" {
-    bucket         = "<S3_bucket_name>"
-    key            = "<filepath-to-statefile>"
-    region         = "<region>"
-    dynamodb_table = "<dynamodb_table_name>"
+    `bucket         = "<S3_bucket_name>"`
+    `key            = "<filepath-to-statefile>"`
+    `region         = "<region>"`
+    `dynamodb_table = "<dynamodb_table_name>"`
     encrypt        = true
   }
 }
+
 
 
 
