@@ -87,18 +87,18 @@ All the steps commands are present in the "view push command" section.
 
 After we pus hthe image copy the image URL and add it to the main.tf file to the lambda defination.
 
-resource "aws_lambda_function" "simple_time_service" {
-  function_name = "simple_time_service"
-  role          = aws_iam_role.lambda_exec_role.arn
-  package_type  = "Image"
-  `image_uri     = "<Your Image URL>"`
-  timeout       = 10
+    resource "aws_lambda_function" "simple_time_service" {
+    function_name = "simple_time_service"
+    role          = aws_iam_role.lambda_exec_role.arn
+    package_type  = "Image"
+    `image_uri     = "<Your Image URL>"`
+    timeout       = 10
 
-  vpc_config {
-    subnet_ids         = aws_subnet.private[*].id
-    security_group_ids = [aws_security_group.lambda_sg.id]
-  }
-}
+    vpc_config {
+        subnet_ids         = aws_subnet.private[*].id
+        security_group_ids = [aws_security_group.lambda_sg.id]
+    }
+    }
 
 #### 5. Create S3 bucket and Dynamodb table for remote statefile.
 
